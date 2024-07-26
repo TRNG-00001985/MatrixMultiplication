@@ -11,7 +11,10 @@ public class MtrixMultiplication {
 			res[i]=arr[i]*arr2[i];
 		}
 		System.out.print(Arrays.toString(res));
+		System.out.println(Arrays.toString(arr));
 	}
+	
+	
 
 }
 
