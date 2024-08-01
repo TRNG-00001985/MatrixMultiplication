@@ -1,0 +1,35 @@
+use archana;
+create table Employee(EmployeeID int,EmployeeName varchar(255),DepartmentidID int);
+insert into Employee (EmployeeID,EmployeeName,DepartmentidID) values(1,"John",1),(2,"Jane",2),(3,"Mark",1),(4,"Emily",3),(5,"Karen",5);
+select * from Employee;
+create table Departments(DepartmentID int,DepartmentName varchar(255));
+insert into Departments(DepartmentID,DepartmentName) values(1,"Sales"),(2,"HR"),(3,"IT"),(4,"Marketing"),(5,NULL);
+create table Projects(ProjectId int,ProjectName varchar(255),DepartmentId int);
+insert into Projects(ProjectId,ProjectName,DepartmentId) values(101,"Project A",1),(102,"Project B",2),(103,"Project C",3),(104,"Project D",4),(105,"Project D",NULL);
+select * from Projects;
+
+
+select EmployeeName,DepartmentID, DepartmentName from Employee inner join Departments on Employee.DepartmentidID=Departments.DepartmentID;
+
+select DepartmentID,EmployeeName, DepartmentName from Employee left join Departments on Employee.DepartmentidID=Departments.DepartmentID;
+select EmployeeName, EmployeeID, DepartmentName from Employee right join Departments on Employee.DepartmentidID=Departments.DepartmentID;
+
+select * from Employee join Projects on Employee.DepartmentidID=Projects.DepartmentId;
+select EmployeeID, EmployeeName,DepartmentID from Employee inner join Departments on Employee.DepartmentidID=Departments.DepartmentId where  DepartmentID>(select DepartmentID from Departments where DepartmentName="HR"); 
+select * from Projects;
+select * from Departments;
+SELECT p.ProjectId, p.ProjectName, d.DepartmentName
+FROM Projects p
+inner JOIN Departments d ON p.DepartmentId = d.DepartmentID;
+
+SELECT e.EmployeeId, e.EmployeeName
+FROM Employee e
+JOIN Departments d ON e.DepartmentidID = d.DepartmentId
+WHERE d.DepartmentName IS NULL;
+
+SELECT d.DepartmentId, d.DepartmentName
+FROM Departments d
+LEFT JOIN Employee e ON d.DepartmentId= e.DepartmentidID
+WHERE e.EmployeeName IS NULL;
+
+select DepartmentName, count(EmployeeID) as NoOfEmployees from Departments left join Employee on  Departments.DepartmentID= Employee.DepartmentidID;
